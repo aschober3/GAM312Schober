@@ -5,14 +5,12 @@ Saved
 Build
 .idea
 .vscode
-.vsconfig
 .vs
 .DS_Store
 *.VC.db
 *.opensdf
 *.opendb
 *.sdf
-*.sln
 *.suo
 *.xcodeproj
 *.xcworkspace
