@@ -20,29 +20,63 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Declares the MoveForward function
 	UFUNCTION()
-		void MoveForward(float axisValue);
+	void MoveForward(float axisValue);
 
+	// Declares the MoveRight function
 	UFUNCTION()
-		void MoveRight(float axisValue);
+	void MoveRight(float axisValue);
 
+	// Declares the StartJump function
 	UFUNCTION()
-		void StartJump();
+	void StartJump();
 
+	// Declares the StopJump function
 	UFUNCTION()
-		void StopJump();
+	void StopJump();
 
+	// Declares the FindObject function
 	UFUNCTION()
-		void FindObject();
+	void FindObject();
 
+	// Declares a visible camera component attached to the player
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* PlayerCamComp;
+
+	// Health value of the player
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	float Health = 100.0f;
+
+	// Hunger value of the player
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	float Hunger = 100.0f;
+
+	// Stamina value of the player
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
+	float Stamina = 100.0f;
+
+	// Sets player health
+	UFUNCTION(BlueprintCallable)
+	void SetHealth(float amount);
+
+	// Sets player hunger
+	UFUNCTION(BlueprintCallable)
+	void SetHunger(float amount);
+
+	// Sets player stamina
+	UFUNCTION(BlueprintCallable)
+	void SetStamina(float amount);
+
+	// Decreases stats of player
+	UFUNCTION()
+	void DecreaseStats();
 
 };
