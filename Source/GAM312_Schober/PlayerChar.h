@@ -7,6 +7,7 @@
 #include "Camera/CameraComponent.h"
 #include "Resource_M.h"
 #include "Kismet/GameplayStatics.h"
+#include "BuildingPart.h"
 #include "PlayerChar.generated.h"
 
 UCLASS()
@@ -31,75 +32,111 @@ public:
 
 	// Declares the MoveForward function
 	UFUNCTION()
-	void MoveForward(float axisValue);
+		void MoveForward(float axisValue);
 
 	// Declares the MoveRight function
 	UFUNCTION()
-	void MoveRight(float axisValue);
+		void MoveRight(float axisValue);
 
 	// Declares the StartJump function
 	UFUNCTION()
-	void StartJump();
+		void StartJump();
 
 	// Declares the StopJump function
 	UFUNCTION()
-	void StopJump();
+		void StopJump();
 
 	// Declares the FindObject function
 	UFUNCTION()
-	void FindObject();
+		void FindObject();
 
 	// Declares a visible camera component attached to the player
 	UPROPERTY(VisibleAnywhere)
-	UCameraComponent* PlayerCamComp;
+		UCameraComponent* PlayerCamComp;
 
 	// Health value of the player
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
-	float Health = 100.0f;
+		float Health = 100.0f;
 
 	// Hunger value of the player
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
-	float Hunger = 100.0f;
+		float Hunger = 100.0f;
 
 	// Stamina value of the player
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
-	float Stamina = 100.0f;
+		float Stamina = 100.0f;
 
+	// Amount of wood the player has
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		int Wood;
 
+	// Amount of stone the player has
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		int Stone;
 
+	// Amount of berries the player has
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		int Berry;
 
+	// Array storing resource quantities
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
 		TArray<int> ResourcesArray;
 
+	// Array storing resource names
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		TArray<FString> ResourcesNameArray;
 
+	// Material used for hit marker decal
 	UPROPERTY(EditAnywhere, Category = "HitMarker")
 		UMaterialInterface* hitDecal;
 
+	// Stores number of each type of building part the player has
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Supplies")
+		TArray<int> BuildingArray;
+
+	// Indicates if the player is currently placing a part
+	UPROPERTY()
+		bool isBuilding;
+
+	// References which building part to spawn
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+		TSubclassOf<ABuildingPart> BuildPartClass;
+
+	// Pointer to currently spawned building part being placed
+	UPROPERTY()
+		ABuildingPart* spawnedPart;
+
 	// Sets player health
 	UFUNCTION(BlueprintCallable)
-	void SetHealth(float amount);
+		void SetHealth(float amount);
 
 	// Sets player hunger
 	UFUNCTION(BlueprintCallable)
-	void SetHunger(float amount);
+		void SetHunger(float amount);
 
 	// Sets player stamina
 	UFUNCTION(BlueprintCallable)
-	void SetStamina(float amount);
+		void SetStamina(float amount);
 
 	// Decreases stats of player
 	UFUNCTION()
-	void DecreaseStats();
+		void DecreaseStats();
 
+	// Gives the player a specified amount of a resource
 	UFUNCTION()
 		void GiveResource(float amount, FString resourceType);
+
+	// Reduces specified wood and stone amount, increments building part count
+	UFUNCTION(BlueprintCallable)
+		void UpdateResources(float woodAmount, float stoneAmount, FString buildingObject);
+
+	// Attempts to spawn building part
+	UFUNCTION(BlueprintCallable)
+		void SpawnBuilding(int buildingID, bool& isSuccess);
+
+	// Rotates the currently spawned building part
+	UFUNCTION()
+		void RotateBuilding();
+
 
 };
