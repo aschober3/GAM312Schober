@@ -8,6 +8,7 @@
 #include "Resource_M.h"
 #include "Kismet/GameplayStatics.h"
 #include "BuildingPart.h"
+#include "PlayerWidget.h"
 #include "PlayerChar.generated.h"
 
 UCLASS()
@@ -105,6 +106,10 @@ public:
 	// Pointer to currently spawned building part being placed
 	UPROPERTY()
 		ABuildingPart* spawnedPart;
+
+	// Reference to the player's HUD widget
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UPlayerWidget* playerUI;
 
 	// Sets player health
 	UFUNCTION(BlueprintCallable)

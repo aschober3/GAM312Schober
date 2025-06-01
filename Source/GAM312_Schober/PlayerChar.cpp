@@ -47,6 +47,9 @@ void APlayerChar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Call to update the HUD bars with current Health, Hunger, and Stamina values
+	playerUI->UpdateBars(Health, Hunger, Stamina);
+
 	// Checks if the player is building
 	if (isBuilding)
 	{
@@ -284,7 +287,7 @@ void APlayerChar::UpdateResources(float woodAmount, float stoneAmount, FString b
 // Spawns building part if available and player is not currently building
 void APlayerChar::SpawnBuilding(int buildingID, bool& isSuccess)
 {
-	if (!isBuilding) // Onlu allow one build at once
+	if (!isBuilding) // Only allow one build at once
 	{
 		if (BuildingArray[buildingID] >= 1) // Check if player has building part
 		{
