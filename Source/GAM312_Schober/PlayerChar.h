@@ -112,12 +112,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UPlayerWidget* playerUI;
 
+	// Reference to the objective widget used to update UI elements
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UObjectiveWidget* objWidget;
 
+	// Tracks the number of objects the player has built
 	UPROPERTY()
 		float objectsBuilt;
 
+	// Tracks the total amount of materials collected by the player
 	UPROPERTY()
 		float matsCollected;
 

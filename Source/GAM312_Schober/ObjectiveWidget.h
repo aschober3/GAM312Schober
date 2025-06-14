@@ -16,9 +16,11 @@ class GAM312_SCHOBER_API UObjectiveWidget : public UUserWidget
 
 public:
 
+	// Blueprint event to update the UI with the current materials collected
 	UFUNCTION(BlueprintImplementableEvent)
 		void UpdatematOBJ(float matsCollected);
 
+	// Blueprint event to update the UI with the current number of objects built
 	UFUNCTION(BlueprintImplementableEvent)
 		void UpdatebuildOBJ(float objectsBuilt);
 	

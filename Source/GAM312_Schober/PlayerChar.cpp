@@ -40,6 +40,7 @@ void APlayerChar::BeginPlay()
 	// Calls DecreaseStats every 2 seconds
 	GetWorld()->GetTimerManager().SetTimer(StatsTimerHandle, this, &APlayerChar::DecreaseStats, 2.0f, true);
 
+	// If the objWidget is valid, set build and material object values to 0
 	if (objWidget)
 	{
 		objWidget->UpdatebuildOBJ(0.0f);
@@ -161,8 +162,10 @@ void APlayerChar::FindObject()
 					{
 						GiveResource(resourceValue, hitName);
 
+						// Add the collected resource value to the total
 						matsCollected = matsCollected + resourceValue;
 
+						// Update the material object display with the new total
 						objWidget->UpdatematOBJ(matsCollected);
 
 						// Show on-screen message for feedback
@@ -190,8 +193,11 @@ void APlayerChar::FindObject()
 	else
 	{
 		isBuilding = false;
+
+		// Increment the count of built objects
 		objectsBuilt = objectsBuilt + 1.0f;
 
+		// Update the UI with the new built objects count
 		objWidget->UpdatebuildOBJ(objectsBuilt);
 	
 	}
